@@ -52,9 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cafe_Conssole.cs" />
+    <Compile Include="Cafe_Console.cs" />
     <Compile Include="MenuClass.cs" />
     <Compile Include="MenuRepository.cs" />
+    <Compile Include="ProgramUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
