@@ -26,7 +26,7 @@ namespace Cafe_Console
                     "3. See all menu items\n" +
                     "4. Exit");
                 string userInput = Console.ReadLine();
-                switch(userInput)
+                switch (userInput)
                 {
                     case "1":
                         //Add to menu list
@@ -34,6 +34,7 @@ namespace Cafe_Console
                         break;
                     case "2":
                         //Delete from menu list
+                        DeleteMenuItem();
                         break;
                     case "3":
                         //See all menu items
@@ -68,29 +69,13 @@ namespace Cafe_Console
             Console.WriteLine("Enter the Description of the new item:");
             menuClass.MealDescription = Console.ReadLine();
 
-            Console.WriteLine("Enter the list of Ingredients:");
-            string ingredients = Console.ReadLine();
-            list.Add(ingredients);
-
-            while (ingredients != "")
-            {
-                Console.WriteLine("next ingredient:");
-                ingredients = Console.ReadLine();
-                list.Add(ingredients);
-            }
-            if (ingredients == "")
-            {
-                foreach (string input in list)
-                {
-                    Console.WriteLine($"{input} added to ingredients list.");
-                }
-                Console.ReadLine();
-            }
+            Console.WriteLine("Enter the list of Ingredients:\n" +
+                "(using a ',' between each ingredient i.e.: 1,2,3,...");
+            menuClass.MealIngredients = Console.ReadLine();
 
             Console.WriteLine("Enter the price:");
             menuClass.MealPrice = Convert.ToDecimal(Console.ReadLine());
 
-            list = menuClass.MealIngredients();
             _menuRepo.AddToMenu(menuClass);
         }
 
@@ -102,6 +87,42 @@ namespace Cafe_Console
             foreach (MenuClass item in menuList)
             {
                 DisplayMenu(item);
+            }
+            WriteRead();
+        }
+        
+        private void DeleteMenuItem()
+        {
+            Console.Clear();
+            List<MenuClass> menuList = _menuRepo.GetMenuItems();
+
+            int index = 1;
+            foreach (MenuClass item in menuList)
+            {
+                Console.WriteLine($"{index}. {item.MealName}");
+                index++;
+            }
+            Console.WriteLine("Which menu item would you like to delete?");
+            int menuItem = int.Parse(Console.ReadLine());
+            int menuIndex = menuItem - 1;
+            
+            if(menuIndex >= 0 && menuIndex < menuList.Count)
+            {
+                MenuClass menuClass = menuList[menuIndex];
+                if(_menuRepo.DeleteMenuItem(menuClass))
+                {
+                    Console.WriteLine($"{menuClass.MealName} was successfully deleted.");
+                }
+                else
+                {
+                    Console.WriteLine("Oh no, something went wrong.");
+                    DeleteMenuItem();
+                }
+            }
+            else
+            {
+                Console.WriteLine("That is not a valid selection.");
+                DeleteMenuItem();
             }
             WriteRead();
         }
@@ -118,8 +139,13 @@ namespace Cafe_Console
             Console.WriteLine($"Name: {menuClass.MealName}\n" +
                 $"Menu number: #{menuClass.MealNumber}\n" +
                 $"Description: {menuClass.MealDescription}\n" +
-                $"Ingredients: {menuClass.MealIngredients}\n" +
-                $"Price: ${menuClass.MealPrice}");
+                $"Ingredients: ");
+            string[] text = menuClass.MealIngredients.Split(',');
+            foreach (var word in text)
+            {
+                Console.WriteLine($"-{word}");
+            }
+            Console.WriteLine($"Price: ${menuClass.MealPrice}\n");
         }
     }
 }
