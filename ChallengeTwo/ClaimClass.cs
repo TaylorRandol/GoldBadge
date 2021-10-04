@@ -6,7 +6,32 @@ using System.Threading.Tasks;
 
 namespace ChallengeTwo
 {
-    class ClaimClass
+    public class ClaimClass
     {
+        public ClaimClass() { }
+
+        public ClaimClass (double claimID, string claimType, string description, decimal claimAmount, DateTime dateOfIncident, DateTime dateOfClaim, bool isValid)
+        {
+            ClaimID = claimID;
+            ClaimType = claimType;
+            Description = description;
+            ClaimAmount = claimAmount;
+            DateOfIncident = dateOfIncident;
+            DateOfClaim = dateOfClaim;
+            IsValid = isValid;
+        }
+        public double ClaimID { get; set; }
+
+        public string ClaimType { get; set; }
+
+        public string Description { get; set; }
+
+        public decimal ClaimAmount { get; set; }
+
+        public DateTime DateOfIncident { get; set; }
+
+        public DateTime DateOfClaim { get; set; }
+
+        public bool IsValid { get; set; }
     }
 }

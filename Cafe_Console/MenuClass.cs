@@ -10,10 +10,10 @@ namespace Cafe_Console
     {
         public MenuClass() { }
 
-        public MenuClass(int mealNumber, string mealName, string mealDescription, string mealIngredients, decimal mealPrice)
+        public MenuClass(string mealName, int mealNumber, string mealDescription, List<string> mealIngredients, decimal mealPrice)
         {
-            MealNumber = mealNumber;
             MealName = mealName;
+            MealNumber = mealNumber;
             MealDescription = mealDescription;
             MealIngredients = mealIngredients;
             MealPrice = mealPrice;
@@ -24,7 +24,7 @@ namespace Cafe_Console
 
         public string MealDescription { get; set; }
 
-        public string MealIngredients { get; set; }
+        public List<string> MealIngredients { get; set; }
 
         public decimal MealPrice { get; set; }
     }
