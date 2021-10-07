@@ -81,21 +81,51 @@ namespace ChallengeThree
         }
         private void EditBadge()
         {
+            Console.Clear();
+            Console.WriteLine("What BadgeId Number would you like to update?");
+            double input = double.Parse(Console.ReadLine());
+            BadgeClass badge = _repo.GetBadgeID(input);
 
+            Console.WriteLine($"{badge.BadgeID} has access to these doors {badge.ListOfDoorNames}");
+            Console.WriteLine("What would you like to do?\n" +
+                "1. Remove a door\n" +
+                "2. Add a new door\n");
+            string userInput = Console.ReadLine();
+            switch (userInput)
+            {
+                case "1":
+                    Console.WriteLine("Which door would you like to remove?");
+                    string user1 = Console.ReadLine();
+                    badge.ListOfDoorNames.Remove(user1);
+                    Console.WriteLine($"{badge.BadgeID} now has access to these doors {badge.ListOfDoorNames}");
+                    break;
+                case "2":
+                    Console.WriteLine("Which dooe would you like to add?");
+                    string user2 = Console.ReadLine();
+                    badge.ListOfDoorNames.Add(user2);
+                    Console.WriteLine($"{badge.BadgeID} now has access to these doors {badge.ListOfDoorNames}");
+                    break;
+                default:
+                    Console.WriteLine("Incorrect input please try again.");
+                    EditBadge();
+                    break;
+            }
         }
+
         private void ListAllBadges()
         {
             Console.Clear();
             Console.WriteLine("Key");
-            Console.WriteLine("BadgeID#\t\tDoorAccess");
-            
-            foreach(KeyValuePair<double, List<string>> key in dict)
+            Console.WriteLine(new String('_', 50));
+            Console.WriteLine("BadgeID#\tDoorAccess");
+            Console.WriteLine(new String('-', 50));
+            foreach (var id in dict)
             {
-                Console.WriteLine($"{key.Key.ToString()}\t\t");
-                foreach(string word in key.Value)
-                    Console.WriteLine($"{word},");
-                Console.WriteLine("\n");
+                Console.WriteLine($"{id.Key}");
+                foreach (var door in id.Value)
+                    Console.WriteLine($"\t\t{door} ");
             }
+            Console.WriteLine("\n");
             WriteRead();
         }
 
@@ -108,7 +138,7 @@ namespace ChallengeThree
         private void SeedData()
         {
             BadgeClass person1 = new BadgeClass(123456d, new List<string>() { "A1", "A2", "B3" });
-            BadgeClass person2 = new BadgeClass(098675d, new List<string>() { "C4", "D5", "E6" });
+            BadgeClass person2 = new BadgeClass(298675d, new List<string>() { "C4", "D5", "E6" });
             _repo.AddBadge(person1);
             _repo.AddBadge(person2);
             dict.Add(person1.BadgeID, person1.ListOfDoorNames);
