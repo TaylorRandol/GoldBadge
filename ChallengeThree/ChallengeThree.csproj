@@ -46,6 +46,7 @@
     <Compile Include="BadgeClass.cs" />
     <Compile Include="BadgeRepository.cs" />
     <Compile Include="Badge_Console.cs" />
+    <Compile Include="ProgramUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

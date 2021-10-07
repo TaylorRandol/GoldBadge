@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace ChallengeThree
 {
-    class Badge_Console
+    public class Badge_Console
     {
         static void Main(string[] args)
         {
+            ProgramUI ui = new ProgramUI();
+            ui.Run();
         }
     }
 }

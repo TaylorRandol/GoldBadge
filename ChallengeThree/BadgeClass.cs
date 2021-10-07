@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ChallengeThree
 {
-    class BadgeClass
+    public class BadgeClass
     {
+        public double BadgeID { get; set; }
+
+        public List<string> ListOfDoorNames { get; set; }
     }
 }

@@ -9,32 +9,28 @@ namespace ChallengeTwo
 {
     public class ClaimRepository
     {
-        public readonly List<ClaimClass> _claims = new List<ClaimClass>();
+        public Queue<ClaimClass> _claims = new Queue<ClaimClass>();
         //Create new claim data
-        public bool AddToClaim()
+        public void AddToClaim(ClaimClass claim)
         {
-            Queue claimsQueue = new Queue();
-            claimsQueue.Enqueue(_claims);
-            return;
-            
+            _claims.Enqueue(claim);
         }
-        public bool AddToClaims(ClaimClass claim)
-        {
-            int startingCount = _claims.Count;
-
-            _claims.Add(claim);
-
-            bool wasAdded = (_claims.Count > startingCount) ? true : false;
-            return wasAdded;
-        }
-
+        
         //Show claims listed out in queue order
-        public List<ClaimClass> GetClaimClasses()
+        public Queue<ClaimClass> GetClaimClasses()
         {
             return _claims;
         }
+      
+        public bool RemoveClaimFromQueue()
+        {
+            int startingCount = _claims.Count;
+            _claims.Dequeue();
 
-        //Show next claim to be handled in the queue
-        
+            if (startingCount > _claims.Count)
+                return true;
+            else
+                return false;
+        }
     }
 }

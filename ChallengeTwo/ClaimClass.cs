@@ -10,7 +10,7 @@ namespace ChallengeTwo
     {
         public ClaimClass() { }
 
-        public ClaimClass (double claimID, string claimType, string description, decimal claimAmount, DateTime dateOfIncident, DateTime dateOfClaim, bool isValid)
+        public ClaimClass (double claimID, string claimType, string description, decimal claimAmount, DateTime dateOfIncident, DateTime dateOfClaim)
         {
             ClaimID = claimID;
             ClaimType = claimType;
@@ -18,7 +18,7 @@ namespace ChallengeTwo
             ClaimAmount = claimAmount;
             DateOfIncident = dateOfIncident;
             DateOfClaim = dateOfClaim;
-            IsValid = isValid;
+            
         }
         public double ClaimID { get; set; }
 
@@ -32,6 +32,15 @@ namespace ChallengeTwo
 
         public DateTime DateOfClaim { get; set; }
 
-        public bool IsValid { get; set; }
+        public bool IsValid
+        {
+            get
+            {
+                if ((DateOfClaim - DateOfIncident).TotalDays < 30)
+                    return true;
+                else
+                    return false;
+            }
+        }
     }
 }
