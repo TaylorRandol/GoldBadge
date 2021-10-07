@@ -58,6 +58,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ChallengeThree\ChallengeThree.csproj">
+      <Project>{C489A52D-FB40-4D09-A0E8-3D05DB6401A8}</Project>
+      <Name>ChallengeThree</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ChallengeTwo\Challenge_Two.csproj">
       <Project>{CE64BE7E-E79D-4BB5-8B21-0F764260F243}</Project>
       <Name>Challenge_Two</Name>
