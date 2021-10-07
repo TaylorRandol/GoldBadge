@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ChallengeTwo.ClaimClass;
 
 namespace ChallengeTwo
 {
@@ -87,8 +88,14 @@ namespace ChallengeTwo
             Console.WriteLine("Enter the Claim ID:");
             claim.ClaimID = Convert.ToDouble(Console.ReadLine());
 
-            Console.WriteLine("Enter the Claim Type:");
-            claim.ClaimType = Console.ReadLine();
+            Console.WriteLine("Enter the Claim Type:\n" +
+                "0. Car\n" +
+                "1. Home\n" +
+                "2. Theft");
+            string inputType = Console.ReadLine();
+            ClaimType claimType;
+            claimType = (ClaimType)int.Parse(inputType);
+            claim.ClaimsType = claimType;
 
             Console.WriteLine("Enter a Claim Description:");
             claim.Description = Console.ReadLine();
@@ -114,13 +121,13 @@ namespace ChallengeTwo
 
         public void DisplayClaims(ClaimClass claim)
         {
-            Console.WriteLine(String.Format("{0,-5}|{1,-5}|{2,-20}|{3,0:C}|{4,-15:d}|{5,-15:d}|{6,0}", claim.ClaimID, claim.ClaimType, claim.Description, claim.ClaimAmount, claim.DateOfIncident, claim.DateOfClaim, claim.IsValid));
+            Console.WriteLine(String.Format("{0,-5}|{1,-5}|{2,-20}|{3,0:C}|{4,-15:d}|{5,-15:d}|{6,0}", claim.ClaimID, claim.ClaimsType, claim.Description, claim.ClaimAmount, claim.DateOfIncident, claim.DateOfClaim, claim.IsValid));
         }
         
         private void SeedData()
         {
-            var claim1 = new ClaimClass(1234567, "Car", "test words", 400.23m, new DateTime(2021, 5, 25), new DateTime(2021, 5, 27));
-            var claim2 = new ClaimClass(2234678, "Home", "test tests", 122.43m, new DateTime(2021, 5, 18), new DateTime(2021, 6, 18));
+            var claim1 = new ClaimClass(1234567, ClaimType.Car, "test words", 400.23m, new DateTime(2021, 5, 25), new DateTime(2021, 5, 27));
+            var claim2 = new ClaimClass(2234678, ClaimType.Home, "test tests", 122.43m, new DateTime(2021, 5, 18), new DateTime(2021, 6, 18));
 
             _repo.AddToClaim(claim1);
             _repo.AddToClaim(claim2);
@@ -128,7 +135,7 @@ namespace ChallengeTwo
 
         public string ShowClaim(ClaimClass claim)
         {
-            return String.Format("{0,-5}|{1,-5}|{2,-20}|{3,0:C}|{4,-15:d}|{5,-15:d}|{6,0}", claim.ClaimID, claim.ClaimType, claim.Description, claim.ClaimAmount, claim.DateOfIncident, claim.DateOfClaim, claim.IsValid);
+            return String.Format("{0,-5}|{1,-5}|{2,-20}|{3,0:C}|{4,-15:d}|{5,-15:d}|{6,0}", claim.ClaimID, claim.ClaimsType, claim.Description, claim.ClaimAmount, claim.DateOfIncident, claim.DateOfClaim, claim.IsValid);
         }
 
         public void DealWithClaim()

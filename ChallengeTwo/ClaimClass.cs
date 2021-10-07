@@ -10,10 +10,10 @@ namespace ChallengeTwo
     {
         public ClaimClass() { }
 
-        public ClaimClass (double claimID, string claimType, string description, decimal claimAmount, DateTime dateOfIncident, DateTime dateOfClaim)
+        public ClaimClass (double claimID, ClaimType claimsType, string description, decimal claimAmount, DateTime dateOfIncident, DateTime dateOfClaim)
         {
             ClaimID = claimID;
-            ClaimType = claimType;
+            ClaimsType = claimsType;
             Description = description;
             ClaimAmount = claimAmount;
             DateOfIncident = dateOfIncident;
@@ -22,7 +22,7 @@ namespace ChallengeTwo
         }
         public double ClaimID { get; set; }
 
-        public string ClaimType { get; set; }
+        public ClaimType ClaimsType { get; set; }
 
         public string Description { get; set; }
 
@@ -41,6 +41,12 @@ namespace ChallengeTwo
                 else
                     return false;
             }
+        }
+        public enum ClaimType
+        {
+            Car,
+            Home,
+            Theft
         }
     }
 }
