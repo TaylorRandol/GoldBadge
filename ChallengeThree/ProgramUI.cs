@@ -54,6 +54,7 @@ namespace ChallengeThree
             }
 
         }
+
         private void AddNewBadge()
         {
             Console.Clear();
@@ -79,6 +80,7 @@ namespace ChallengeThree
             BadgeClass content = new BadgeClass(badgeNumber, doorAccess);
             _repo.AddBadge(content);
         }
+
         private void EditBadge()
         {
             Console.Clear();
